@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+
+  postgres:
+    image: postgres:15-alpine
+    restart: "no"  # избавляемся от автоматической перезагрузки
+    ports:
+      - "5432:5432"
+    environment:
+      # Superuser username/password
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: rootroot
+      POSTGRES_DB: aio-bot
+    volumes:
+      - "01-simple-alchemy-postgres:/var/lib/postgresql/data"
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: "no"
+    ports:
+      - "8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: mishany1105@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: qufzIf-budjyf-9decte
+    volumes:
+      - "01-simple-alchemy-pgadmin:/var/lib/pgadmin"
+    depends_on:
+      - postgres
+
+volumes:
+  01-simple-alchemy-pgadmin:
+  01-simple-alchemy-postgres:

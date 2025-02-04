@@ -1,0 +1,13 @@
+/venv
+/migrations
+*__pycache__
+/.idea
+/.vscode
+logs.log
+*.xlsx
+*.DS_Store
+
+alembic.ini
+database/migrations
+.env
+test.py
