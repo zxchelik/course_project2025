@@ -1,13 +1,58 @@
+# --- 🐍 Python / Backend ---
 /venv
 /migrations
-*__pycache__
-/.idea
-/.vscode
+src/backend/database/migrations
+__pycache__/
+*.pyc
+test.py
+alembic.ini
+.qodo
+
+# --- 📊 Данные ---
 logs.log
 *.xlsx
-*.DS_Store
+!RAL.xlsx
 
-alembic.ini
-database/migrations
+# --- 🔐 Env files ---
 .env
-test.py
+.env.*.local
+!.env.example
+*.local
+
+# --- 🧑‍💻 IDE / OS / Misc ---
+.idea/
+.vscode/
+*.sw?
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# --- 🌐 Frontend ---
+node_modules/
+dist/
+dist-ssr/
+build/
+out/
+coverage/
+.next/
+.storybook-out/
+
+# --- 📦 Lock files (оставь один, нужный) ---
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# --- 📋 Logs ---
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# --- 🧠 VSCode workspace recommendations ---
+!.vscode/extensions.json
