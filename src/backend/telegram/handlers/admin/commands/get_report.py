@@ -7,10 +7,10 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, FSInputFile
 from loguru import logger
 
-from src.backend.database.get_exel.get_full_exel import get_full_exel
-from src.backend.telegram.filters.db_filters import CheckStatus
-from src.backend.telegram.keyboards.inline import get_select_month, SelectMonth
-from src.backend.telegram.states.admin import GetReport
+from database.get_exel.get_full_exel import get_full_exel
+from telegram.filters.db_filters import CheckStatus
+from telegram.keyboards.inline import get_select_month, SelectMonth
+from telegram.states.admin import GetReport
 
 router = Router()
 

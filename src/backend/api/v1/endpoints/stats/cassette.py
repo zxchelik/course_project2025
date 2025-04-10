@@ -4,9 +4,9 @@ from fastapi import APIRouter, Query, Depends
 from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.backend.api.v1.Models.stats.general import ProducedCount
-from src.backend.database.models import Cassette
-from src.backend.database.session_context import get_async_session
+from api.v1.Models.stats.general import ProducedCount
+from database.models import Cassette
+from database.session_context import get_async_session
 
 router = APIRouter(prefix="/cassette")
 

@@ -10,21 +10,21 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from src.backend.telegram.utils.aiogram_calendar import SimpleCalendar
-from src.backend.database.db_cmd.cassette_cmd import (
+from telegram.utils.aiogram_calendar import SimpleCalendar
+from database.db_cmd.cassette_cmd import (
     get_cassette_number_by_suffix_painting,
     get_painting_states_by_id,
     paint_cassette,
 )
-from src.backend.database.db_cmd.user_cmd import is_admin, get_user
-from src.backend.database.models import Cassette
-from src.backend.database.modelsDTO.cassette import CassetteModelWithAdditions
-from src.backend.database.modelsDTO.paint_task import PaintingTask
-from src.backend.telegram.handlers.user.message.different import send_menu
-from src.backend.telegram.keyboards.cassete.painting import PaintTypesSelector, PaintTypeSelectorCallbackData
-from src.backend.telegram.keyboards.inline import get_inline_kb, get_confirm_date_ikb, get_confirm_ikb
-from src.backend.telegram.states.users import CassettePainting
-from src.backend.telegram.utils.forward_report import forward_report, ReportType
+from database.db_cmd.user_cmd import is_admin, get_user
+from database.models import Cassette
+from database.modelsDTO.cassette import CassetteModelWithAdditions
+from database.modelsDTO.paint_task import PaintingTask
+from telegram.handlers.user.message.different import send_menu
+from telegram.keyboards.cassete.painting import PaintTypesSelector, PaintTypeSelectorCallbackData
+from telegram.keyboards.inline import get_inline_kb, get_confirm_date_ikb, get_confirm_ikb
+from telegram.states.users import CassettePainting
+from telegram.utils.forward_report import forward_report, ReportType
 
 router = Router()
 

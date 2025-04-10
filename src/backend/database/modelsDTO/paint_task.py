@@ -2,8 +2,8 @@ from datetime import date
 
 from pydantic import BaseModel
 
-from src.backend.database.modelsDTO.cassette import CassetteModelWithAdditions
-from src.backend.telegram.keyboards.cassete.painting import PaintType
+from database.modelsDTO.cassette import CassetteModelWithAdditions
+from telegram.keyboards.cassete.painting import PaintType
 
 
 class PaintingTask(BaseModel):

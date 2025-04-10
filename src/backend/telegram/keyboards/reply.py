@@ -3,7 +3,7 @@ from typing import Union
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
-from src.backend.database.db_cmd.user_cmd import get_groups
+from database.db_cmd.user_cmd import get_groups
 
 confirm_kb = ReplyKeyboardMarkup(
     resize_keyboard=True,

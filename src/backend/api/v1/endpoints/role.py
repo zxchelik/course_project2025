@@ -5,11 +5,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 
-from src.backend.api.v1.Models.role import RoleRead, RoleCreate, RoleAssign, RoleUpdate
-from src.backend.api.v1.dependencies.permissions import require_role
-from src.backend.database.models.role import Role
-from src.backend.database.models.user import User
-from src.backend.database.session_context import get_async_session
+from api.v1.Models.role import RoleRead, RoleCreate, RoleAssign, RoleUpdate
+from api.v1.dependencies.permissions import require_role
+from database.models.role import Role
+from database.models.user import User
+from database.session_context import get_async_session
 
 router = APIRouter(prefix="/roles", tags=["roles"])
 

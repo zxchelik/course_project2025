@@ -9,19 +9,19 @@ from sqlalchemy import select, func, desc, text, or_, and_
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from src.backend.database.db_cmd.Exceptions import AdditionNotFoundException
-from src.backend.database.models import Cassette, CassetteGroupMember
-from src.backend.database.models.blank_cassettes import CassetteType
-from src.backend.database.models.cassette import CassetteState
-from src.backend.database.models.cassette_group_member import CassetteGroupMemberType
-from src.backend.database.modelsDTO.cassette import (
+from database.db_cmd.Exceptions import AdditionNotFoundException
+from database.models import Cassette, CassetteGroupMember
+from database.models.blank_cassettes import CassetteType
+from database.models.cassette import CassetteState
+from database.models.cassette_group_member import CassetteGroupMemberType
+from database.modelsDTO.cassette import (
     CassetteNQHModel,
     CassetteNumberModel,
     RawCassetteModel,
     WeldCassetteTaskModel,
 )
-from src.backend.database.modelsDTO.paint_task import PaintingTask
-from src.backend.database.session_context import async_session_context
+from database.modelsDTO.paint_task import PaintingTask
+from database.session_context import async_session_context
 
 help_user_percent = 0.5
 

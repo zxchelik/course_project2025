@@ -4,10 +4,10 @@ from aiogram.filters import Text, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
-from src.backend.database.db_cmd.user_cmd import select_all_users
-from src.backend.telegram.filters.db_filters import CheckStatus, IsAdmin
-from src.backend.telegram.keyboards.inline import get_inline_kb
-from src.backend.telegram.states.admin import Mailing
+from database.db_cmd.user_cmd import select_all_users
+from telegram.filters.db_filters import CheckStatus, IsAdmin
+from telegram.keyboards.inline import get_inline_kb
+from telegram.states.admin import Mailing
 
 router = Router()
 

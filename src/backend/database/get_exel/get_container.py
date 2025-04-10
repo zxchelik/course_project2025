@@ -1,7 +1,7 @@
 from openpyxl import Workbook
 
-from src.backend.database.db_cmd.cantainers_cmd import get_all_container_by_month
-from src.backend.text_templates import exel_header
+from database.db_cmd.cantainers_cmd import get_all_container_by_month
+from text_templates import exel_header
 
 
 async def get_all_container_exel(wb: Workbook, year, month):

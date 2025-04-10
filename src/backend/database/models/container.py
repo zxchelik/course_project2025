@@ -8,8 +8,8 @@ from .base import Base
 
 if TYPE_CHECKING:
     from . import ContGroupMember
-    from src.backend.database.models import Cassette
-    from src.backend.database.models.groups import Groups
+    from database.models import Cassette
+    from database.models.groups import Groups
 
 
 class Container(Base):

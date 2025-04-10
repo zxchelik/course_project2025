@@ -15,7 +15,7 @@ from sqlalchemy import select, or_, and_
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from src.backend.database.db_cmd.blank_cassetes_cmd import (
+from database.db_cmd.blank_cassetes_cmd import (
     get_tasks,
     AddTaskModel,
     EditTaskModel,
@@ -23,14 +23,14 @@ from src.backend.database.db_cmd.blank_cassetes_cmd import (
     edit_tasks,
     DeleteTaskModel,
 )
-from src.backend.database.models import Cassette
-from src.backend.database.models.blank_cassettes import CassetteType
-from src.backend.database.models.cassette import CassetteState
-from src.backend.database.models.cassette_group_member import CassetteGroupMemberType
-from src.backend.database.session_context import async_session_context
-from src.backend.telegram.filters.db_filters import IsAdmin
-from src.backend.telegram.states.admin import AddCassetteTask
-from src.backend.telegram.utils.auto_size_excel import auto_size_excel
+from database.models import Cassette
+from database.models.blank_cassettes import CassetteType
+from database.models.cassette import CassetteState
+from database.models.cassette_group_member import CassetteGroupMemberType
+from database.session_context import async_session_context
+from telegram.filters.db_filters import IsAdmin
+from telegram.states.admin import AddCassetteTask
+from telegram.utils.auto_size_excel import auto_size_excel
 
 router = Router()
 

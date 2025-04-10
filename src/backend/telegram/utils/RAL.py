@@ -3,7 +3,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 
 
 def load_ral() -> dict[int, list[int]]:
-    wb = openpyxl.load_workbook("src/backend/static/RAL.xlsx")
+    wb = openpyxl.load_workbook("static/RAL.xlsx")
     sheet: Worksheet = wb["RAL"]
     data = sheet.values
     ral = {}

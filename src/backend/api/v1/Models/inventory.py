@@ -28,3 +28,17 @@ class NamesNode(BaseModel):
 class PlasticModel(BaseModel):
     color: int
     total_weight: float
+
+
+class CassetteModel(BaseModel):
+    id: int
+    number: str | None
+    name: str
+    state: str
+    type: str
+    storage: str
+    technical_comment: str
+    comment: str | None
+
+    class Config:
+        orm_mode = True

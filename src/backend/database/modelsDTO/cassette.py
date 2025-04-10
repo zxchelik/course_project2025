@@ -2,10 +2,10 @@ from datetime import date
 
 from pydantic import BaseModel, validator
 
-from src.backend.database.models.blank_cassettes import CassetteType
-from src.backend.database.models.cassette import CassetteState
-from src.backend.database.modelsDTO.container import ContainerModel
-from src.backend.database.modelsDTO.user import UserIdFioModel
+from database.models.blank_cassettes import CassetteType
+from database.models.cassette import CassetteState
+from database.modelsDTO.container import ContainerModel
+from database.modelsDTO.user import UserIdFioModel
 
 
 class StorageMisc(BaseModel):

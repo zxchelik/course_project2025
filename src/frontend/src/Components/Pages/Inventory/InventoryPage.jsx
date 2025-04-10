@@ -1,6 +1,7 @@
 import { Tabs } from 'antd';
 import ContainerTable from "./ContainerTable.jsx";
-import PlascticTable from "./PlascticTable.jsx";
+import PlasticTable from "./PlascticTable.jsx";
+import CassetteTable from "./CassetteTable.jsx";
 
 /**
  * Компонент «Страница складского учёта»
@@ -18,12 +19,12 @@ export default function InventoryPage() {
         {
             key: '3',
             label: 'Пластик',
-            children: <PlascticTable/>,
+            children: <PlasticTable/>,
         },
         {
             key: '2',
             label: 'Кассеты',
-            children: 'Content of Tab Pane 2',
+            children: <CassetteTable/>,
         },
     ];
 

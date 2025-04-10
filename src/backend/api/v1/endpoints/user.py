@@ -7,10 +7,10 @@ from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 from starlette import status
 
-from src.backend.api.v1.Models.user import UserRead, UserCreate, UserUpdate, UserRolesResponse
-from src.backend.api.v1.dependencies.permissions import require_role
-from src.backend.database.models.user import User
-from src.backend.database.session_context import get_async_session
+from api.v1.Models.user import UserRead, UserCreate, UserUpdate, UserRolesResponse
+from api.v1.dependencies.permissions import require_role
+from database.models.user import User
+from database.session_context import get_async_session
 
 router = APIRouter(prefix="/users", tags=["users"], dependencies=[Depends(require_role("admin"))])
 

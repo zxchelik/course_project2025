@@ -10,8 +10,8 @@ from aiogram.types import (
     ForceReply,
 )
 
-from src.backend.envfile import conf
-from src.backend.misc import bot
+from envfile import conf
+from misc import bot
 
 
 class ReportType(IntEnum):

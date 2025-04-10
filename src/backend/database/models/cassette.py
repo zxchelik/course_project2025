@@ -10,10 +10,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .base import Base, MyShortSTR, MyLongSTR, TgId
 
 if TYPE_CHECKING:
-    from src.backend.database.models.user import User
-    from src.backend.database.models import Container
-    from src.backend.database.models.cassette_group_member import CassetteGroupMember
-    from src.backend.database.models.assembly_step import AssemblyStep
+    from database.models.user import User
+    from database.models import Container
+    from database.models.cassette_group_member import CassetteGroupMember
+    from database.models.assembly_step import AssemblyStep
 
 
 class CassetteState:

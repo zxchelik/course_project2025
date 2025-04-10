@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .base import Base, MyShortSTR
 
 if TYPE_CHECKING:
-    from src.backend.database.models.user import User
+    from database.models.user import User
 
 
 class CassetteGroupMemberType:

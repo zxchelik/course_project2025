@@ -7,17 +7,18 @@ from aiogram.filters import Text, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, FSInputFile, Message
 from openpyxl.styles import Font, PatternFill
+from openpyxl.styles.builtins import total
 from openpyxl.workbook import Workbook
 from openpyxl.worksheet.worksheet import Worksheet
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.backend.database.db_cmd.plastic_supply import get_plastic_residue, get_all_colors
-from src.backend.database.models import PlasticSupply
-from src.backend.database.session_context import async_session_context
-from src.backend.telegram.filters.db_filters import IsAdmin
-from src.backend.telegram.keyboards.inline import get_inline_kb
-from src.backend.telegram.states.admin import GetPlasticResidue
-from src.backend.telegram.utils.RAL import load_ral
+from database.db_cmd.plastic_supply import get_plastic_residue, get_all_colors
+from database.models import PlasticSupply
+from database.session_context import async_session_context
+from telegram.filters.db_filters import IsAdmin
+from telegram.keyboards.inline import get_inline_kb
+from telegram.states.admin import GetPlasticResidue
+from telegram.utils.RAL import load_ral
 
 router = Router()
 
@@ -25,7 +26,7 @@ router = Router()
 @router.callback_query(IsAdmin(), Text("get_plastic_residue"))
 async def start_get_availability(callback: CallbackQuery, state: FSMContext):
     text = "Выберите"
-    kb = get_inline_kb([[("Получить наличие", "get_residue")], [("Поставка", "add_delivery")]])
+    kb = get_inline_kb([[("В наличии", "get_residue")], [("Поставка", "add_delivery")]])
     await state.set_state(GetPlasticResidue.select_type)
     await callback.message.edit_text(text=text, reply_markup=kb)
 
@@ -36,11 +37,12 @@ async def write_availability(wb: Workbook):
     ws.append(["Номер цвета", "Осталось"])
     ral = load_ral()
     rgb_to_hex = lambda r, g, b: f"{r:02X}{g:02X}{b:02X}"
+    total = 0
     for i, row in enumerate(data):
         ws.append(tuple(row))
-
         try:
             cn, w = row
+            total += w
             bgcolor = ral[cn]
             r, g, b = bgcolor
             fcolor = "000000" if r * 0.299 + g * 0.587 + b * 0.114 > 186 else "FFFFFF"
@@ -52,6 +54,7 @@ async def write_availability(wb: Workbook):
             ws[f"A{i + 2}"].fill = fill
         except KeyError:
             pass
+    ws["C1"] = total
 
 
 @router.callback_query(StateFilter(GetPlasticResidue.select_type), Text("get_residue"))

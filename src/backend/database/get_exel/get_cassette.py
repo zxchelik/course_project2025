@@ -1,5 +1,5 @@
-from src.backend.database.db_cmd.cassette_cmd import get_cassette_info_for_excel
-from src.backend.text_templates import exel_header
+from database.db_cmd.cassette_cmd import get_cassette_info_for_excel
+from text_templates import exel_header
 
 
 async def get_all_hw_exel(wb, year, month):

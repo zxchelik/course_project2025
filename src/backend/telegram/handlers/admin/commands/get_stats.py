@@ -6,12 +6,12 @@ from aiogram.filters import Text, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, FSInputFile
 
-from src.backend.telegram.utils.aiogram_calendar import calendar_callback_filter, SimpleCalendar
-from src.backend.telegram.filters.db_filters import CheckStatus, IsAdmin
-from src.backend.telegram.keyboards.inline import get_confirm_ikb
-from src.backend.telegram.states.admin import GetStats
-from src.backend.text_templates import confirm_date_text
-from src.backend.telegram.utils.containers_statistic import get_containers_statistic
+from telegram.utils.aiogram_calendar import calendar_callback_filter, SimpleCalendar
+from telegram.filters.db_filters import CheckStatus, IsAdmin
+from telegram.keyboards.inline import get_confirm_ikb
+from telegram.states.admin import GetStats
+from text_templates import confirm_date_text
+from telegram.utils.containers_statistic import get_containers_statistic
 
 router = Router()
 

@@ -2,9 +2,9 @@ from aiogram.filters.callback_data import CallbackData
 from aiogram.types import InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from src.backend.database.db_cmd.cassette_cmd import get_tasks_for_welding, get_unique_welding_addition_for_welding
-from src.backend.database.modelsDTO.cassette import CassetteNQHModel
-from src.backend.telegram.keyboards.inline import SelectNumber
+from database.db_cmd.cassette_cmd import get_tasks_for_welding, get_unique_welding_addition_for_welding
+from database.modelsDTO.cassette import CassetteNQHModel
+from telegram.keyboards.inline import SelectNumber
 
 
 class SelectCassette(CallbackData, prefix="SelectCassette"):

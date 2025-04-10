@@ -6,19 +6,19 @@ from aiogram.filters import Text, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 
-from src.backend.telegram.utils.aiogram_calendar import SimpleCalendar
-from src.backend.database.db_cmd.blank_cassetes_cmd import get_task_by_id, TaskModel, execute_task
-from src.backend.database.db_cmd.user_cmd import select_user, is_admin
-from src.backend.telegram.handlers.user.message.different import send_menu
-from src.backend.telegram.keyboards.cassete.cutting import (
+from telegram.utils.aiogram_calendar import SimpleCalendar
+from database.db_cmd.blank_cassetes_cmd import get_task_by_id, TaskModel, execute_task
+from database.db_cmd.user_cmd import select_user, is_admin
+from telegram.handlers.user.message.different import send_menu
+from telegram.keyboards.cassete.cutting import (
     get_select_blank_cassette_kb,
     SelectBlankCassette,
     get_select_quantity_kb,
     SelectQuantity,
 )
-from src.backend.telegram.keyboards.inline import get_confirm_ikb, get_confirm_date_ikb
-from src.backend.telegram.states.users import CassetteCutting
-from src.backend.telegram.utils.forward_report import forward_report, ReportType
+from telegram.keyboards.inline import get_confirm_ikb, get_confirm_date_ikb
+from telegram.states.users import CassetteCutting
+from telegram.utils.forward_report import forward_report, ReportType
 
 router = Router()
 

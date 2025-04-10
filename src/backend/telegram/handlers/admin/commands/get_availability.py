@@ -13,13 +13,13 @@ from openpyxl.worksheet.worksheet import Worksheet
 from sqlalchemy import select, not_, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.backend.database.db_cmd.cantainers_cmd import move_container_with_session
-from src.backend.database.models import Container
-from src.backend.database.session_context import async_session_context
-from src.backend.telegram.filters.db_filters import IsAdmin
-from src.backend.telegram.keyboards.inline import get_inline_kb
-from src.backend.telegram.states.admin import GetAvailability
-from src.backend.telegram.utils.RAL import load_ral
+from database.db_cmd.cantainers_cmd import move_container_with_session
+from database.models import Container
+from database.session_context import async_session_context
+from telegram.filters.db_filters import IsAdmin
+from telegram.keyboards.inline import get_inline_kb
+from telegram.states.admin import GetAvailability
+from telegram.utils.RAL import load_ral
 
 router = Router()
 

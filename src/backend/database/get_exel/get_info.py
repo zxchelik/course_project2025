@@ -2,7 +2,7 @@ from typing import Callable, Awaitable
 
 from openpyxl.workbook import Workbook
 
-from src.backend.text_templates import exel_header
+from text_templates import exel_header
 
 
 async def write_info_to_excel_file(

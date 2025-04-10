@@ -5,8 +5,8 @@ from pydantic import BaseModel, validator
 from sqlalchemy import select, update, desc, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.backend.database.models.blank_cassettes import BlankCassettes, CassetteType
-from src.backend.database.session_context import async_session_context
+from database.models.blank_cassettes import BlankCassettes, CassetteType
+from database.session_context import async_session_context
 
 
 class TaskModel(BaseModel):
@@ -151,7 +151,7 @@ async def execute_task(session: AsyncSession, task_id: int, quantity: int, worke
         task.worker_id = worker_id
         task.is_completed = True
 
-    from src.backend.database.db_cmd.cassette_cmd import add_cassette
+    from database.db_cmd.cassette_cmd import add_cassette
 
     await add_cassette(
         quantity=quantity,

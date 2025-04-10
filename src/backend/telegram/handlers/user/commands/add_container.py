@@ -6,18 +6,18 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 from loguru import logger
 
-from src.backend import misc
-from src.backend.telegram.utils.aiogram_calendar import calendar_callback_filter, SimpleCalendar
-from src.backend.database.db_cmd.cantainers_cmd import add_container, get_last_cont_numb, check_cont_numb
-from src.backend.database.db_cmd.user_cmd import get_users, is_admin
-from src.backend.telegram.filters.db_filters import CheckStatus
-from src.backend.telegram.handlers.user.message.different import send_menu
-from src.backend.telegram.keyboards.inline import get_inline_kb, get_confirm_ikb, get_select_number_fab, SelectNumber
-from src.backend.telegram.keyboards.name_ikb import select_name_container_fub, SelectName, SelectGroup, select_group_fub
-from src.backend.telegram.keyboards.reply import get_reply_keyboard
-from src.backend.telegram.states.users import AddContainer
-from src.backend.text_templates import *
-from src.backend.telegram.utils.forward_report import forward_report, ReportType
+import misc
+from telegram.utils.aiogram_calendar import calendar_callback_filter, SimpleCalendar
+from database.db_cmd.cantainers_cmd import add_container, get_last_cont_numb, check_cont_numb
+from database.db_cmd.user_cmd import get_users, is_admin
+from telegram.filters.db_filters import CheckStatus
+from telegram.handlers.user.message.different import send_menu
+from telegram.keyboards.inline import get_inline_kb, get_confirm_ikb, get_select_number_fab, SelectNumber
+from telegram.keyboards.name_ikb import select_name_container_fub, SelectName, SelectGroup, select_group_fub
+from telegram.keyboards.reply import get_reply_keyboard
+from telegram.states.users import AddContainer
+from text_templates import *
+from telegram.utils.forward_report import forward_report, ReportType
 
 router = Router()
 

@@ -5,9 +5,10 @@ from jose.exceptions import JWTError, ExpiredSignatureError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from src.backend.envfile import conf
-from src.backend.database.models.user import User
-from src.backend.database.session_context import get_async_session
+from api.v1.Models.user import UserRead
+from envfile import conf
+from database.models.user import User
+from database.session_context import get_async_session
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
 SECRET_KEY = conf.token_config.SECRET_KEY
@@ -16,7 +17,7 @@ ALGORITHM = conf.token_config.ALGORITHM or "HS256"
 
 async def get_current_user(
     token: str = Depends(oauth2_scheme), session: AsyncSession = Depends(get_async_session)
-) -> User:
+) -> UserRead:
     try:
         payload = jwt.decode(
             token,
@@ -48,7 +49,7 @@ async def get_current_user(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Пользователь не найден",
         )
-    return user
+    return UserRead.from_orm(user)
 
 
 def require_role(required_role: str):

@@ -9,3 +9,9 @@ export async function getTopColor() {
     const res = await Api.get(`/stats/container/top_colors`);
     return res.data;
 }
+
+export async function getPersonalStats() {
+    const tg_id = localStorage.getItem('tg_id');
+    const res = await Api.get(`/stats/users/${tg_id}`);
+    return res.data;
+}

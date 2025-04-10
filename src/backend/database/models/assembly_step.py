@@ -4,10 +4,10 @@ from typing import TYPE_CHECKING, List
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.backend.database.models.base import Base, MyShortSTR
+from database.models.base import Base, MyShortSTR
 
 if TYPE_CHECKING:
-    from src.backend.database.models import Cassette, User
+    from database.models import Cassette, User
 
 
 class AssemblyStepTypes:

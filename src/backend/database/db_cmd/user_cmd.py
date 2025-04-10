@@ -4,9 +4,9 @@ from typing import Sequence
 from sqlalchemy import Insert, select, update, delete, and_
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.backend.database.models.user import User
-from src.backend.database.modelsDTO.user import UserIdFioModel
-from src.backend.database.session_context import async_session_context
+from database.models.user import User
+from database.modelsDTO.user import UserIdFioModel
+from database.session_context import async_session_context
 
 
 @async_session_context

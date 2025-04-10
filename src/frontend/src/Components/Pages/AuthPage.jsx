@@ -17,10 +17,12 @@ const AuthPage = () => {
             const response = await Api.post('/auth/login', formData, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}});
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('user', `${response.data.user.fio} (${response.data.user.tg_id})`);
+            localStorage.setItem('tg_id', response.data.user.tg_id);
             const decoded = jwtDecode(response.data.access_token);
             localStorage.setItem('roles', JSON.stringify(decoded.roles || []))
             navigate('/');
         } catch (error) {
+            console.log(error);
             messageApi.error(error.response?.data.detail || 'Ошибка при входе');
         } finally {
             setLoading(false);
@@ -36,6 +38,7 @@ const AuthPage = () => {
             messageApi.success('Регистрация прошла успешно!');
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('user', `${response.data.user.fio} (${response.data.user.tg_id})`);
+            localStorage.setItem('tg_id', response.data.user.tg_id);
             const decoded = jwtDecode(response.data.access_token);
             localStorage.setItem('roles', JSON.stringify(decoded.roles || []))
             navigate('/');

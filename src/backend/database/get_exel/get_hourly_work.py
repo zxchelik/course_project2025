@@ -1,5 +1,5 @@
-from src.backend.database.db_cmd.hourly_work_cmd import get_all_hourly_work_by_month
-from src.backend.text_templates import exel_header
+from database.db_cmd.hourly_work_cmd import get_all_hourly_work_by_month
+from text_templates import exel_header
 
 
 async def get_all_hw_exel(wb, year, month):

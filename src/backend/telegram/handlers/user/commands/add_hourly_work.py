@@ -7,22 +7,22 @@ from aiogram.filters import Text, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
-from src.backend.telegram.utils.aiogram_calendar import SimpleCalendar, calendar_callback_filter
-from src.backend.database.db_cmd.hourly_work_cmd import add_hourly_work
-from src.backend.database.db_cmd.names_cmd import select_name
-from src.backend.database.db_cmd.user_cmd import is_admin, select_user
-from src.backend.telegram.filters.db_filters import CheckStatus
-from src.backend.telegram.handlers.user.message.different import send_menu
-from src.backend.telegram.keyboards.inline import (
+from telegram.utils.aiogram_calendar import SimpleCalendar, calendar_callback_filter
+from database.db_cmd.hourly_work_cmd import add_hourly_work
+from database.db_cmd.names_cmd import select_name
+from database.db_cmd.user_cmd import is_admin, select_user
+from telegram.filters.db_filters import CheckStatus
+from telegram.handlers.user.message.different import send_menu
+from telegram.keyboards.inline import (
     get_confirm_ikb,
     get_select_duration_fab,
     SelectDuration,
     get_inline_kb,
 )
-from src.backend.telegram.keyboards.name_ikb import select_name_hourly_fub, SelectName
-from src.backend.telegram.keyboards.reply import get_reply_keyboard
-from src.backend.telegram.states.users import AddHourlyWork
-from src.backend.text_templates import (
+from telegram.keyboards.name_ikb import select_name_hourly_fub, SelectName
+from telegram.keyboards.reply import get_reply_keyboard
+from telegram.states.users import AddHourlyWork
+from text_templates import (
     select_date,
     confirm_date_text,
     select_name_text,
@@ -30,7 +30,7 @@ from src.backend.text_templates import (
     get_comment,
     invalid_date,
 )
-from src.backend.telegram.utils.forward_report import forward_report, ReportType
+from telegram.utils.forward_report import forward_report, ReportType
 
 router = Router()
 

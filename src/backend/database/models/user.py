@@ -8,7 +8,7 @@ from .base import Base, MyShortSTR, MyLongSTR
 
 if TYPE_CHECKING:
     from .role import Role
-    from src.backend.database.models.groups import Groups
+    from database.models.groups import Groups
 
 
 class User(Base):

@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 
-from src.backend.database.modelsDTO.cassette import CassetteModel
-from src.backend.database.modelsDTO.user import UserIdFioModel
+from database.modelsDTO.cassette import CassetteModel
+from database.modelsDTO.user import UserIdFioModel
 
 
 class AssemblyInfo(BaseModel):

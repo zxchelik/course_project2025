@@ -3,9 +3,9 @@ import asyncio
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.backend.database.models.groups import Groups
-from src.backend.database.models.user import User
-from src.backend.database.session_context import async_session_context
+from database.models.groups import Groups
+from database.models.user import User
+from database.session_context import async_session_context
 
 
 @async_session_context

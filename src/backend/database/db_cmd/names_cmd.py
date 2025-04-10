@@ -3,8 +3,8 @@ from typing import Sequence
 from sqlalchemy import Insert, select, not_
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.backend.database.models.names import Names
-from src.backend.database.session_context import async_session_context
+from database.models.names import Names
+from database.session_context import async_session_context
 
 
 @async_session_context

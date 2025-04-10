@@ -12,11 +12,11 @@ from loguru import logger
 from starlette.middleware.cors import CORSMiddleware
 
 from envfile import conf as config
+from api import main_api_router
+from database.session_context import sessionmaker
 from misc import bot
-from src.backend.api import main_api_router
-from src.backend.database.session_context import sessionmaker
-from src.backend.telegram.handlers.register_router import register_router
-from src.backend.telegram.middlewares.database_middleware import DbSessionMiddleware
+from telegram.handlers.register_router import register_router
+from telegram.middlewares.database_middleware import DbSessionMiddleware
 
 logger.add(
     "../../logs.log",
@@ -32,10 +32,14 @@ storage = MemoryStorage()
 WEBHOOK_PATH = config.bot.path
 WEBHOOK_URL = config.bot.webhook_url
 
-WEBHOOK_SSL_CERT = "src/backend/ssl/cert.crt"
-WEBHOOK_SSL_PRIV = "src/backend/ssl/cert.key"
+WEBHOOK_SSL_CERT = "ssl/cert.crt"
+WEBHOOK_SSL_PRIV = "ssl/cert.key"
 
-app = FastAPI()
+app = FastAPI(
+    docs_url="/api/docs",  # Swagger-UI
+    redoc_url="/api/redoc",  # ReDoc (если нужен)
+    openapi_url="/api/openapi.json",  # JSON-схема
+)
 # bot = Bot(token=config.bot.token, parse_mode="HTML")
 dp = Dispatcher(storage=storage)
 
@@ -59,7 +63,6 @@ app.include_router(main_api_router)
 
 @app.on_event("startup")
 async def on_startup():
-
     if config.telegram:
         dp.update.middleware(DbSessionMiddleware(session_maker=sessionmaker))
         register_router(dp)  # функция для регистрации роутеров
@@ -69,15 +72,15 @@ async def on_startup():
             if not config.test:
                 await bot.set_webhook(
                     WEBHOOK_URL,
-                    certificate=FSInputFile(WEBHOOK_SSL_CERT),
+                    # certificate=FSInputFile(WEBHOOK_SSL_CERT),
                 )
             else:
-                logger.info(f"App started for bot: {(await bot.get_me()).username}")
                 global polling_task
                 polling_task = asyncio.create_task(dp.start_polling(bot))
+        logger.info(f"App started for bot: {(await bot.get_me()).username}")
 
 
-@app.post(WEBHOOK_PATH)
+@app.post(WEBHOOK_PATH, include_in_schema=False)
 async def bot_webhook(update: dict):
     telegram_update = types.Update(**update)
     await dp.feed_update(bot=bot, update=telegram_update)
@@ -108,9 +111,9 @@ async def error_handler(event: ErrorEvent, update: Update):
 
 
 if __name__ == "__main__":
-    if config.test:
-        uvicorn.run(app, host="0.0.0.0", port=int(config.bot.port))
-    else:
-        uvicorn.run(
-            app, host="0.0.0.0", port=int(config.bot.port), ssl_certfile=WEBHOOK_SSL_CERT, ssl_keyfile=WEBHOOK_SSL_PRIV
-        )
+    # if config.test:
+    uvicorn.run(app, host="0.0.0.0", port=int(config.bot.port))
+    # else:
+    #     uvicorn.run(
+    #         app, host="0.0.0.0", port=int(config.bot.port), ssl_certfile=WEBHOOK_SSL_CERT, ssl_keyfile=WEBHOOK_SSL_PRIV
+    #     )

@@ -3,9 +3,9 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 
-import src.backend.telegram.keyboards.inline
-from src.backend.telegram.filters.db_filters import CheckStatus, IsAdmin
-from src.backend.text_templates import menu, help as help_mes
+import telegram.keyboards.inline
+from telegram.filters.db_filters import CheckStatus, IsAdmin
+from text_templates import menu, help as help_mes
 
 router = Router()
 
@@ -22,7 +22,7 @@ async def get_chat_id(message: Message):
 
 async def send_menu(message: Message, is_admin: bool = False, edit: bool = False):
     menu_text = menu
-    kb = src.backend.telegram.keyboards.inline.menu_kb(is_admin=is_admin)
+    kb = telegram.keyboards.inline.menu_kb(is_admin=is_admin)
     if edit:
         await message.edit_text(text=menu_text, reply_markup=kb, parse_mode="HTML")
     else:

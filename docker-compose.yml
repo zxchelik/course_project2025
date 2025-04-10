@@ -1,32 +1,91 @@
-version: '3.8'
-
 services:
+  traefik:
+    image: traefik:v3.3
+    container_name: traefik
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.le.acme.email=${TRAEFIK_EMAIL}"
+      - "--certificatesresolvers.le.acme.storage=/acme/acme.json"
+      - "--certificatesresolvers.le.acme.httpchallenge=true"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+      - "--api.dashboard=true"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./acme:/acme"
+    networks: [ web ]
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: src/backend/Dockerfile
+    env_file:
+      - .env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`${DOMAIN}`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls.certresolver=le"
+      - "traefik.docker.network=web"
+    expose:
+      - "${WEBHOOK_PORT}"
+    networks: [ web ]
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./src/frontend
+    env_file:
+      - .env
+    expose:
+      - "80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=le"
+      - "traefik.docker.network=web"
+    networks: [ web ]
+    restart: unless-stopped
 
   postgres:
     image: postgres:15-alpine
-    restart: "no"  # избавляемся от автоматической перезагрузки
     ports:
       - "5432:5432"
     environment:
-      # Superuser username/password
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: rootroot
-      POSTGRES_DB: aio-bot
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
     volumes:
       - "01-simple-alchemy-postgres:/var/lib/postgresql/data"
+    networks: [internal]
+    restart: unless-stopped
 
   pgadmin:
     image: dpage/pgadmin4:latest
-    restart: "no"
     ports:
       - "8080:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: mishany1105@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: qufzIf-budjyf-9decte
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
     volumes:
       - "01-simple-alchemy-pgadmin:/var/lib/pgadmin"
     depends_on:
       - postgres
+    networks: [internal]
+    restart: unless-stopped
+
+networks:
+  web:
+    driver: bridge
+  internal:
+    driver: bridge
 
 volumes:
   01-simple-alchemy-pgadmin:

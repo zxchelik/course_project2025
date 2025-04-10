@@ -8,6 +8,7 @@ function Header({collapsed, onToggle}) {
     const handleLogout = () => {
         localStorage.removeItem('access_token');
         localStorage.removeItem('user');
+        localStorage.removeItem('tg_id');
         window.location.href = '/login';
     };
     const user = localStorage.getItem('user');

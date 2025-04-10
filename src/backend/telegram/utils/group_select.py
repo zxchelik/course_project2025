@@ -6,8 +6,8 @@ from aiogram.types import CallbackQuery, InlineKeyboardMarkup, Message, InlineKe
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from pydantic import BaseModel, Field
 
-from src.backend.database.db_cmd.user_cmd import get_user, get_all_users_for_group_select
-from src.backend.database.modelsDTO.user import UserIdFioModel
+from database.db_cmd.user_cmd import get_user, get_all_users_for_group_select
+from database.modelsDTO.user import UserIdFioModel
 
 GetUsersFuncType: TypeAlias = Callable[[], Awaitable[list[UserIdFioModel]]]
 

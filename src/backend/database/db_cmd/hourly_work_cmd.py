@@ -5,8 +5,8 @@ from sqlalchemy import select, extract
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from src.backend.database.models.hourly_work import HourlyWork
-from src.backend.database.session_context import async_session_context
+from database.models.hourly_work import HourlyWork
+from database.session_context import async_session_context
 
 
 @async_session_context

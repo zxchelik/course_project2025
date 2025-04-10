@@ -4,13 +4,13 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 from loguru import logger
 
-from src.backend.database.db_cmd.names_cmd import add_name
-from src.backend.telegram.filters.db_filters import CheckStatus
-from src.backend.telegram.handlers.user.message.different import send_menu
-from src.backend.telegram.keyboards.name_ikb import edit_name_fub, SelectName
-from src.backend.telegram.keyboards.reply import get_reply_keyboard
-from src.backend.telegram.states.admin import AddName
-from src.backend.text_templates import text010, text020
+from database.db_cmd.names_cmd import add_name
+from telegram.filters.db_filters import CheckStatus
+from telegram.handlers.user.message.different import send_menu
+from telegram.keyboards.name_ikb import edit_name_fub, SelectName
+from telegram.keyboards.reply import get_reply_keyboard
+from telegram.states.admin import AddName
+from text_templates import text010, text020
 
 router = Router()
 

@@ -46,7 +46,7 @@ function AppLayout() {
                 <div className="flex flex-col items-center">
                     <Link to="/" className="flex items-center justify-center py-4">
                         <img
-                            src= {collapsed ? "/public/static/SPUTNIKAGROLogoSmall.png" : "/public/static/SPUTNIKAGROLogo.png"}
+                            src= {collapsed ? "/static/SPUTNIKAGROLogoSmall.png" : "/static/SPUTNIKAGROLogo.png"}
                             alt="Логотип"
                             className="h-12 transition-all duration-300"
                         />

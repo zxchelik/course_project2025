@@ -1,7 +1,7 @@
 # aio_bot
 
-```bash
-openssl genrsa -out src/backend/ssl/cert.key 2048
-openssl req -new -x509 -key src/backend/ssl/cert.key -out src/backend/ssl/cert.crt -days 365
-```
-
+> **Запуск**  
+> 1. Настройте DNS-запись вашего домена на IP-адрес сервера.  
+> 2. Скопируйте пример переменных окружения: cp .env.example .env.  
+> 3. Заполните файл **.env** своими значениями.  
+> 4. Запустите сервисы: `docker compose up -d`.

@@ -2,11 +2,13 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select, not_
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.backend.api.v1.Models.inventory import ContainerModel, NamesNode, PlasticModel
-from src.backend.api.v1.dependencies.permissions import require_role
-from src.backend.database.db_cmd.plastic_supply import get_plastic_residue
-from src.backend.database.models import Container, Names
-from src.backend.database.session_context import get_async_session
+from api.v1.Models.inventory import ContainerModel, NamesNode, PlasticModel, CassetteModel
+from api.v1.dependencies.permissions import require_role
+from database.db_cmd.plastic_supply import get_plastic_residue
+from database.models import Container, Names, Cassette
+from database.models.blank_cassettes import CassetteType
+from database.models.cassette import CassetteState
+from database.session_context import get_async_session
 
 router = APIRouter(prefix="/inventory", tags=["inventory"], dependencies=[Depends(require_role("Кладовщик"))])
 
@@ -74,3 +76,34 @@ async def get_names_tree(session: AsyncSession = Depends(get_async_session)):
 async def get_plastic():
     data = await get_plastic_residue()
     return [PlasticModel(color=i[0], total_weight=i[1]) for i in data if i[1] > 0]
+
+
+@router.get("/cassette", response_model=list[CassetteModel])
+async def get_cassette(session: AsyncSession = Depends(get_async_session)):
+    stmt = select(Cassette).filter(Cassette.state != CassetteState.SHIP).order_by(Cassette.id)
+    data = (await session.execute(stmt)).scalars().all()
+    return [CassetteModel.from_orm(i) for i in data]
+
+
+@router.get("/cassette/states", response_model=list[str])
+async def get_cassette_states():
+    return CassetteState.to_list()
+
+
+@router.get("/cassette/types", response_model=list[str])
+async def get_cassette_types():
+    return CassetteType.to_list()
+
+
+@router.get("/cassette/storages", response_model=list[str])
+async def get_cassette_storages(session: AsyncSession = Depends(get_async_session)):
+    stmt = select(Cassette.storage).filter(Cassette.state != CassetteState.SHIP).order_by(Cassette.storage).distinct()
+    data = (await session.execute(stmt)).scalars().all()
+    return data
+
+
+@router.get("/cassette/names", response_model=list[str])
+async def get_cassette_names(session: AsyncSession = Depends(get_async_session)):
+    stmt = select(Cassette.name).filter(Cassette.state != CassetteState.SHIP).order_by(Cassette.name).distinct()
+    data = (await session.execute(stmt)).scalars().all()
+    return data

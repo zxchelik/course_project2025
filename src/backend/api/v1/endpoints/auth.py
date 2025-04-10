@@ -7,11 +7,11 @@ from sqlalchemy.future import select
 from passlib.context import CryptContext
 from sqlalchemy.orm import selectinload
 
-from src.backend.api.v1.Models.auth import TokenSchema, RegistrationSchema
-from src.backend.api.v1.Models.user import UserRead
-from src.backend.database.models.user import User
-from src.backend.database.session_context import get_async_session
-from src.backend.envfile import conf
+from api.v1.Models.auth import TokenSchema, RegistrationSchema
+from api.v1.Models.user import UserRead
+from database.models.user import User
+from database.session_context import get_async_session
+from envfile import conf
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

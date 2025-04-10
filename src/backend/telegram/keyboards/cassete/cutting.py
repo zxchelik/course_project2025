@@ -2,7 +2,7 @@ from aiogram.filters.callback_data import CallbackData
 from aiogram.types import InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from src.backend.database.db_cmd.blank_cassetes_cmd import get_tasks, TaskModel
+from database.db_cmd.blank_cassetes_cmd import get_tasks, TaskModel
 
 
 class SelectBlankCassette(CallbackData, prefix="SelectBlankCassette"):

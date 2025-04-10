@@ -8,11 +8,11 @@ from aiogram.types import CallbackQuery, Message, FSInputFile
 from openpyxl import Workbook
 from openpyxl.worksheet.worksheet import Worksheet
 
-from src.backend.database.db_cmd.names_cmd import select_product, get_parent, update
-from src.backend.telegram.filters.db_filters import IsAdmin
-from src.backend.telegram.handlers.user.message.different import send_menu
-from src.backend.telegram.keyboards.inline import get_inline_kb
-from src.backend.telegram.states.admin import UpdateNames
+from database.db_cmd.names_cmd import select_product, get_parent, update
+from telegram.filters.db_filters import IsAdmin
+from telegram.handlers.user.message.different import send_menu
+from telegram.keyboards.inline import get_inline_kb
+from telegram.states.admin import UpdateNames
 
 router = Router()
 

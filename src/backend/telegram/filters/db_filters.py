@@ -3,7 +3,7 @@ from typing import Union
 from aiogram.filters import BaseFilter
 from aiogram.types import Message
 
-from src.backend.database.db_cmd.user_cmd import check_status, is_admin
+from database.db_cmd.user_cmd import check_status, is_admin
 
 
 class CheckStatus(BaseFilter):

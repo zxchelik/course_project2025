@@ -12,22 +12,22 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from src.backend.database.db_cmd.cantainers_cmd import get_container_number_by_suffix_assembling, move_container
-from src.backend.database.db_cmd.cassette_cmd import get_cassette_number_by_suffix_assembling
-from src.backend.database.db_cmd.names_cmd import select_names
-from src.backend.database.models import Cassette, AssemblyStep, User, Container
-from src.backend.database.models.assembly_step import AssemblyStepTypes
-from src.backend.database.models.blank_cassettes import CassetteType
-from src.backend.database.models.cassette import CassetteState
-from src.backend.database.modelsDTO.AssemblyInfo import AssemblyInfo
-from src.backend.database.modelsDTO.cassette import AdditionalModel, CassetteAssembleModel
-from src.backend.database.modelsDTO.container import ContainerModel
-from src.backend.database.session_context import sessionmaker
-from src.backend.telegram.keyboards.inline import get_inline_kb, get_confirm_date_ikb, get_confirm_ikb
-from src.backend.telegram.states.users import CassetteAssembling
-from src.backend.telegram.utils.aiogram_calendar import SimpleCalendar
-from src.backend.telegram.utils.forward_report import forward_report, ReportType
-from src.backend.telegram.utils.group_select import GroupSelector, GroupSelectorCallbackData, UserGroup
+from database.db_cmd.cantainers_cmd import get_container_number_by_suffix_assembling, move_container
+from database.db_cmd.cassette_cmd import get_cassette_number_by_suffix_assembling
+from database.db_cmd.names_cmd import select_names
+from database.models import Cassette, AssemblyStep, User, Container
+from database.models.assembly_step import AssemblyStepTypes
+from database.models.blank_cassettes import CassetteType
+from database.models.cassette import CassetteState
+from database.modelsDTO.AssemblyInfo import AssemblyInfo
+from database.modelsDTO.cassette import AdditionalModel, CassetteAssembleModel
+from database.modelsDTO.container import ContainerModel
+from database.session_context import sessionmaker
+from telegram.keyboards.inline import get_inline_kb, get_confirm_date_ikb, get_confirm_ikb
+from telegram.states.users import CassetteAssembling
+from telegram.utils.aiogram_calendar import SimpleCalendar
+from telegram.utils.forward_report import forward_report, ReportType
+from telegram.utils.group_select import GroupSelector, GroupSelectorCallbackData, UserGroup
 
 router = Router()
 
@@ -329,11 +329,13 @@ async def process_confirm_add_addition(callback: CallbackQuery, state: FSMContex
         ai.cassette = CassetteAssembleModel.from_orm(cassette)
         await state.update_data(ai=ai)
         info_text = html.escape(
-            f"""кассета:    {ai.cassette.number}
-Доп:        {addition.number}
-Наимен.:    {addition.name}
-дата:       {date.strftime('%d.%m.%Y')}
-группа:     {', '.join([i.fio for i in user_group.group])}"""
+            f"""кассета:     {ai.cassette.number}
+наименование:{ai.cassette.name}
+Доп:         {addition.number}
+наименование:{addition.name}
+Наимен.:     {addition.name}
+дата:        {date.strftime('%d.%m.%Y')}
+группа:      {', '.join([i.fio for i in user_group.group])}"""
         )
         text = f"""#Дополнение\n<pre>{info_text}</pre>"""
         await forward_report(report_type=ReportType.ASSEMBLING, text=text)
@@ -384,10 +386,11 @@ async def proces_add_crane(callback: CallbackQuery, state: FSMContext, db_sessio
         ai.cassette = CassetteAssembleModel.from_orm(cassette)
         await state.update_data(ai=ai)
         info_text = html.escape(
-            f"""кассета:    {ai.cassette.number}
-кран:       {value}
-дата:       {assemble_date.strftime('%d.%m.%Y')}
-группа:     {user.fio}"""
+            f"""кассета:     {ai.cassette.number}
+наименование:{ai.cassette.name}
+кран:        {value}
+дата:        {assemble_date.strftime('%d.%m.%Y')}
+группа:      {user.fio}"""
         )
         text = f"""#Кран\n<pre>{info_text}</pre>"""
         await forward_report(report_type=ReportType.ASSEMBLING, text=text)
@@ -450,10 +453,11 @@ async def add_dissolver_unit(callback: CallbackQuery, state: FSMContext):
         await state.update_data(ai=ai)
 
         info_text = html.escape(
-            f"""кассета:    {ai.cassette.number}
-Р узел:     {du.name}
-дата:       {assemble_date.strftime('%d.%m.%Y')}
-группа:     {', '.join([i.fio for i in user_group.group])}"""
+            f"""кассета:     {ai.cassette.number}
+наименование:{ai.cassette.name}
+Р узел:      {du.name}
+дата:        {assemble_date.strftime('%d.%m.%Y')}
+группа:      {', '.join([i.fio for i in user_group.group])}"""
         )
         text = f"""#Растворный_узел\n<pre>{info_text}</pre>"""
         await forward_report(report_type=ReportType.ASSEMBLING, text=text)
@@ -591,10 +595,12 @@ async def process_confirm_add_container(callback: CallbackQuery, state: FSMConte
         await state.update_data(ai=ai)
 
         info_text = html.escape(
-            f"""кассета:    {ai.cassette.number}
-бочка:      {container.number}
-дата:       {date.strftime('%d.%m.%Y')}
-группа:     {', '.join([i.fio for i in user_group.group])}"""
+            f"""кассета:     {ai.cassette.number}
+наименование:{ai.cassette.name}
+бочка:       {container.number}
+наименование:{container.name}
+дата:        {date.strftime('%d.%m.%Y')}
+группа:      {', '.join([i.fio for i in user_group.group])}"""
         )
         text = f"""#Бочка
 <pre>{info_text}</pre>

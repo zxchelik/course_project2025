@@ -6,10 +6,10 @@ from sqlalchemy import select, not_
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from src.backend.database.db_cmd.groups_cmd import create_group
-from src.backend.database.models.container import Container
-from src.backend.database.models.storage_movements import StorageMovements
-from src.backend.database.session_context import async_session_context
+from database.db_cmd.groups_cmd import create_group
+from database.models.container import Container
+from database.models.storage_movements import StorageMovements
+from database.session_context import async_session_context
 
 
 @async_session_context

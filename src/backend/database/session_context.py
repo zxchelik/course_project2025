@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from loguru import logger
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 
-from src.backend.envfile import conf as config
+from envfile import conf as config
 
 engine = create_async_engine(url=config.db.PG_URI, echo=False)
 sessionmaker = async_sessionmaker(engine, expire_on_commit=False)

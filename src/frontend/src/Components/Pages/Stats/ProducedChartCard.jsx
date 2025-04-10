@@ -5,7 +5,7 @@ import {getProducedCount} from "../../../services/Networking/stats.jsx";
 
 const {Option} = Select
 
-const ProducedChartCard = ({type}) => {
+const ProducedChartCard = ({title,type}) => {
     const [data, setData] = useState([])
     const [period, setPeriod] = useState('week')
     const [loading, setLoading] = useState(false)
@@ -20,7 +20,7 @@ const ProducedChartCard = ({type}) => {
     }, [period, type])
 
     return (<Card
-            title="Произведено продукции"
+            title={title}
             extra={<Select
                 value={period}
                 onChange={setPeriod}

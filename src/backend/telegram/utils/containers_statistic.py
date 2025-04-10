@@ -4,7 +4,7 @@ from datetime import date
 from openpyxl.workbook import Workbook
 from openpyxl.worksheet.worksheet import Worksheet
 
-from src.backend.database.db_cmd.cantainers_cmd import get_stored_containers_from_to
+from database.db_cmd.cantainers_cmd import get_stored_containers_from_to
 
 
 async def get_containers_statistic(first_date: date, last_date: date) -> str:

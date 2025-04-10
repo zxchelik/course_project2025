@@ -2,7 +2,7 @@ from aiogram import Router
 from aiogram.filters import Text
 from aiogram.types import CallbackQuery
 
-from src.backend.telegram.keyboards.inline import get_inline_kb
+from telegram.keyboards.inline import get_inline_kb
 
 router = Router()
 

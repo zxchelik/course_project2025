@@ -3,21 +3,21 @@ from aiogram.filters import Text
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message, InlineKeyboardButton, InlineKeyboardMarkup
 
-from src.backend import misc
+import misc
 
 # from database.db_commands.user_cmd import get_new_user, activate_user, count_check_users, del_user as del_, \
 #     update_group
-from src.backend.database.db_cmd.user_cmd import (
+from database.db_cmd.user_cmd import (
     get_new_user,
     activate_user,
     count_check_users,
     del_user as del_,
     update_group,
 )
-from src.backend.telegram.keyboards.inline import get_confirm_user_kb
-from src.backend.telegram.keyboards.reply import get_group_list
-from src.backend.telegram.states import admin
-from src.backend.text_templates import admin_confirm, admin_cancel
+from telegram.keyboards.inline import get_confirm_user_kb
+from telegram.keyboards.reply import get_group_list
+from telegram.states import admin
+from text_templates import admin_confirm, admin_cancel
 
 router = Router()
 

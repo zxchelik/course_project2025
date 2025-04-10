@@ -3,10 +3,10 @@ from typing import List, TYPE_CHECKING
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.backend.database.models import Base
+from database.models import Base
 
 if TYPE_CHECKING:
-    from src.backend.database.models import User
+    from database.models import User
 
 
 class Role(Base):

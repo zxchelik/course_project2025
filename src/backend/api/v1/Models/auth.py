@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from src.backend.api.v1.Models.user import UserRead
+from api.v1.Models.user import UserRead
 
 
 class TokenSchema(BaseModel):

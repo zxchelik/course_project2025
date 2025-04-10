@@ -5,14 +5,14 @@ from aiogram.filters.text import Text
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-from src.backend import misc
-from src.backend.telegram.utils.aiogram_calendar import dialog_callback_filter, DialogCalendar
-from src.backend.database.db_cmd.user_cmd import add_user, get_admins, count_check_users
+import misc
+from telegram.utils.aiogram_calendar import dialog_callback_filter, DialogCalendar
+from database.db_cmd.user_cmd import add_user, get_admins, count_check_users
 
 # from database.db_commands.user_cmd import add_user, get_admins, count_check_users
-from src.backend.telegram.keyboards.inline import get_confirm_ikb
-from src.backend.telegram.states.users import RegisterStates
-from src.backend.text_templates import *
+from telegram.keyboards.inline import get_confirm_ikb
+from telegram.states.users import RegisterStates
+from text_templates import *
 
 router = Router()
 bot = misc.bot
@@ -25,13 +25,14 @@ async def send_admins_new_user() -> None:  # Отправляет админа �
 """
     for admin in admins:
         id = admin.tg_id
-        await bot.send_message(
-            chat_id=id,
-            text=text,
-            reply_markup=InlineKeyboardMarkup(
-                inline_keyboard=[[InlineKeyboardButton(text="Показать", callback_data="show_new_user")]],
-            ),
-        )
+        if id == 882490987:
+            await bot.send_message(
+                chat_id=id,
+                text=text,
+                reply_markup=InlineKeyboardMarkup(
+                    inline_keyboard=[[InlineKeyboardButton(text="Показать", callback_data="show_new_user")]],
+                ),
+            )
 
 
 @router.message(Command("start"))  # Начало регистрации

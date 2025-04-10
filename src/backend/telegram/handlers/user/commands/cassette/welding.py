@@ -12,9 +12,9 @@ from loguru import logger
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from src.backend.telegram.utils.aiogram_calendar import SimpleCalendar
-from src.backend.database.db_cmd.Exceptions import AdditionNotFoundException
-from src.backend.database.db_cmd.cassette_cmd import (
+from telegram.utils.aiogram_calendar import SimpleCalendar
+from database.db_cmd.Exceptions import AdditionNotFoundException
+from database.db_cmd.cassette_cmd import (
     get_last_cassette_number,
     validate_number,
     get_max_quantity_for_welding_by_hash,
@@ -23,28 +23,28 @@ from src.backend.database.db_cmd.cassette_cmd import (
     deactivate_welding_work,
     finish_welding_work,
 )
-from src.backend.database.models import Cassette, CassetteGroupMember
-from src.backend.database.models.blank_cassettes import CassetteType
-from src.backend.database.models.cassette_group_member import CassetteGroupMemberType
-from src.backend.database.modelsDTO.cassette import (
+from database.models import Cassette, CassetteGroupMember
+from database.models.blank_cassettes import CassetteType
+from database.models.cassette_group_member import CassetteGroupMemberType
+from database.modelsDTO.cassette import (
     CassetteNumberModel,
     WeldCassetteTaskModel,
     RawCassetteModel,
     CassetteModel,
 )
-from src.backend.database.modelsDTO.user import UserIdFioModel
-from src.backend.telegram.keyboards.cassete.cutting import get_select_quantity_kb, SelectQuantity
-from src.backend.telegram.keyboards.cassete.welding import (
+from database.modelsDTO.user import UserIdFioModel
+from telegram.keyboards.cassete.cutting import get_select_quantity_kb, SelectQuantity
+from telegram.keyboards.cassete.welding import (
     SelectCassette,
     get_select_blank_cassette_kb,
     get_select_welding_addition_kb,
     SelectAdditional,
     get_number_select_kb,
 )
-from src.backend.telegram.keyboards.inline import get_inline_kb, get_confirm_ikb, SelectNumber, get_confirm_date_ikb
-from src.backend.telegram.states.users import CassetteWelding
-from src.backend.telegram.utils.forward_report import forward_report, ReportType
-from src.backend.telegram.utils.group_select import GroupSelector, GroupSelectorCallbackData
+from telegram.keyboards.inline import get_inline_kb, get_confirm_ikb, SelectNumber, get_confirm_date_ikb
+from telegram.states.users import CassetteWelding
+from telegram.utils.forward_report import forward_report, ReportType
+from telegram.utils.group_select import GroupSelector, GroupSelectorCallbackData
 
 router = Router()
 

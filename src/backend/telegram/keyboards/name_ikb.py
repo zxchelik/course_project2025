@@ -4,8 +4,8 @@ from aiogram.filters.callback_data import CallbackData
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from src.backend.database.db_cmd.names_cmd import select_names, get_parent_id, select_name
-from src.backend.database.db_cmd.user_cmd import select_all_users
+from database.db_cmd.names_cmd import select_names, get_parent_id, select_name
+from database.db_cmd.user_cmd import select_all_users
 
 
 class SelectName(CallbackData, prefix="SelectName"):
